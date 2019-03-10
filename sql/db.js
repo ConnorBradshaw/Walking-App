@@ -1,9 +1,9 @@
 const mysql = require('mysql');
 const connection = mysql.createConnection({
-    host     : 'localhost',
-    user     : 'root',
-    password : 'Kookie#1010',
-    database : 'testdb',
+    host     : 'us-cdbr-iron-east-03.cleardb.net',
+    user     : 'b5db49fa739410',
+    password : '8caa606c',
+    database : 'heroku_37fbcba44897bb9',
     connectTimeout: 30000
 });
 
