@@ -1,6 +1,6 @@
 const express = require('express');
 const db = require('../sql/db');
-const session = require('express-session');
+const cookieSession = require('cookie-session');
 const router = express.Router();
 
 router.post('/request', (req,res) => {
@@ -26,7 +26,7 @@ router.post('/request', (req,res) => {
 		} else {
 			if(results.length > 0 && req.session.user.userId != results[0].userId) {
 				res.send({
-					"code":200,
+					"code":201,
 					"success":"Match found",
 					"userIds": results[0].userId
 				});
@@ -54,7 +54,7 @@ router.post('/request', (req,res) => {
 		            		req.session.request = request;
 		            		res.send({
 		            			"request": request,
-		                		"code":200,
+		                		"code":202,
 		                		"success":"Creating new request and group"
 		            		});
 		            	}

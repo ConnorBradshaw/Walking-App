@@ -1,6 +1,6 @@
 const express = require('express');
 const db = require('../sql/db');
-const session = require('express-session');
+const cookieSession = require('cookie-session');
 const router = express.Router();
 router.post('/sendRequest', (req,res) => {
 	 userId = req.body.userId;

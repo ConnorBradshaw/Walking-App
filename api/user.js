@@ -1,7 +1,7 @@
 const express = require('express');
 const db = require('../sql/db');
 const passport = require('passport');
-const session = require('express-session');
+const cookieSession = require('cookie-session');
 const bcrypt = require('bcrypt');
 const router = express.Router();
 router.use(passport.initialize());
@@ -51,13 +51,13 @@ router.post('/login', (req, res) => {
 					});
                 } else{
                     res.send({
-                        "code":204,
+                        "code":202,
                         "success":"Email and password does not match"
                     });
                 }
             } else{
                 res.send({
-                    "code":204,
+                    "code":203,
                     "success":"Email does not exist"
                 });
             }
@@ -99,7 +99,7 @@ router.post('/register', (req, res) => {
                 });
             } else {
                 res.send({
-                    "code":204,
+                    "code":203,
                     "success":"Email already exists"
                 });
             }
@@ -107,21 +107,11 @@ router.post('/register', (req, res) => {
     });
 });
 router.get('/logout', (req,res) => {
-    req.session.destroy(function(err) {
-        if(err) {
-            res.send({
-                "code":400,
-                "failed":"error occurred"
-            });
-        }
-        else {
-            res.send({
-                "code": 200,
-                "success":"User logged out"
-            });
-        }
+    req.session = null;
+    res.send({
+        "code":200,
+        "success":"User logged out"
     });
-    
 });
 router.get('/status', (req,res) => {
     if(req.session.user) {
