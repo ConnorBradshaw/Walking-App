@@ -14,7 +14,7 @@ router.post('/request', (req,res) => {
         dateOfRequest: req.body.dateOfRequest,
     }
     POST_LOCATION = `INSERT into location (userId, startLocationLat, startLocationLong, endLocationLat, endLocationLong, timeLeaving, dateOfRequest) VALUES ('${req.session.user.userId}', '${request.startLocationLat}', '${request.startLocationLong}', '${request.endLocationLat}', '${request.endLocationLong}', '${request.timeLeaving}', '${request.dateOfRequest}')`;
-    GET_GROUP_NUM = `SELECT groupNum from testdb.groups where userId = ${req.session.user.userId} && type = 'Owner`;
+    GET_GROUP_NUM = `SELECT groupNum from groups where userId = ${req.session.user.userId} && type = 'Owner`;
     GET_MATCH = `SELECT userId from location WHERE (startLocationLong  >= ${request.startLocationLong - .004} && startLocationLong <= ${request.startLocationLong + .004}) &&  (startLocationLat  >= ${request.startLocationLat - .004} && startLocationLat <= ${request.startLocationLat + .004}) && (endLocationLong  >= ${request.endLocationLong - .004} && endLocationLong <= ${request.endLocationLong + .004}) && (endLocationLat  >= ${request.endLocationLat - .004} && endLocationLat <= ${request.endLocationLat + .004})`;
     db.query(GET_MATCH, (error, results, fields) => {
 		if(error) {
@@ -41,7 +41,7 @@ router.post('/request', (req,res) => {
 		        } else {
 		        	group = Math.floor(Math.random() * 1000001);
 		        	console.log(group);
-		        	MAKE_GROUP = `INSERT into testdb.groups (groupNum, userId, type) VALUES (${group}, ${req.session.user.userId}, 'Owner')`;
+		        	MAKE_GROUP = `INSERT into groups (groupNum, userId, type) VALUES (${group}, ${req.session.user.userId}, 'Owner')`;
 		            db.query(MAKE_GROUP, (error, results, fields) => {
 		            	if (error) {
 		            		res.send({
