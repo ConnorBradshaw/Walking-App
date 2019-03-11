@@ -35,7 +35,7 @@ router.post('/decideRequest', (req,res) => {
 					"error":error
 				});
 			} else {
-				RESOLVE_REQUEST = `UPDATE request set status = 'accepted' where reqId = ${reqNum}`;
+				RESOLVE_REQUEST = `UPDATE request set status = 'accepted' where requesterId = ${reqNum}`;
 				db.query(RESOLVE_REQUEST, (error, results, fields) => {
 					if(error) {
 						res.send({
