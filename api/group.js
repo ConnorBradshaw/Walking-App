@@ -88,6 +88,7 @@ router.get('/checkForRequest', (req,res) => {
 					var object = {
 						"code":200,
 						"success":"Requests",
+						"numOfRequest":results.length
 					}
 					for(var i in results) {
 						object["[" + i + "] User ID"] = results[i].requesterId,
