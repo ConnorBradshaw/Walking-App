@@ -27,7 +27,6 @@ router.post('/decideRequest', (req,res) => {
 	groupNum = req.session.group;
 	ADD_TO_GROUP = `INSERT into groups (groupNum, userId, type) VALUE (${groupNum}, ${reqId}, 'Member')`;
 	if(decision == "accept") {
-		RESOLVE_REQUEST = `UPDATE request set status = 'accepted' where reqId = ${reqNum}`;
 		db.query(ADD_TO_GROUP, (error, results, fields) => {
 			if(error) {
 				res.send({
@@ -36,6 +35,7 @@ router.post('/decideRequest', (req,res) => {
 					"error":error
 				});
 			} else {
+				RESOLVE_REQUEST = `UPDATE request set status = 'accepted' where reqId = ${reqNum}`;
 				db.query(RESOLVE_REQUEST, (error, results, fields) => {
 					if(error) {
 						res.send({
