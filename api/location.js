@@ -43,7 +43,7 @@ router.post('/request', (req,res) => {
 		        } else {
 		        	group = Math.floor(Math.random() * 1000001);
 		        	console.log(group);
-		        	MAKE_GROUP = `INSERT into groups (groupNum, startAddress, endAddress, time, date, userId, type) VALUES (${group}, '${request.startAddress}', '${request.endAddress}', '${request.time}', ${request.date}, ${req.session.user.userId}, 'Owner')`;
+		        	MAKE_GROUP = `INSERT into groups (groupNum, startAddress, endAddress, time, date, userId, type) VALUES (${group}, '${request.startAddress}', '${request.endAddress}', '${request.timeLeaving}', '${request.dateOfRequest}', ${req.session.user.userId}, 'Owner')`;
 		            db.query(MAKE_GROUP, (error, results, fields) => {
 		            	if (error) {
 		            		res.send({
