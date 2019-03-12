@@ -124,7 +124,7 @@ router.get('/checkSentRequest', (req,res) => {
 						"numOfRequest":results.length
 					}
 					for(var i in results) {
-						object["[" + i + "] User ID"] = results[i].requesterId,
+						object["[" + i + "] User ID"] = results[i].requesteeId,
 						object["[" + i + "] Status"] = results[i].status
 					}
 					res.send(object);
