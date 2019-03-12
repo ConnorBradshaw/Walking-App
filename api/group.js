@@ -139,7 +139,7 @@ router.get('/checkSentRequest', (req,res) => {
 	});
 });
 router.get('/checkGroupMembers', (req,res) => {
-	CHECK_GROUP_MEMBERS = `SELECT userId from groups where groupNum = ${req.session.group}`;
+	CHECK_GROUP_MEMBERS = `SELECT userId, startAddress, endAddress, time, date from groups where groupNum = ${req.session.group}`;
 	db.query(CHECK_GROUP_MEMBERS, (error, results, fields) => {
 		if(error) {
 			res.send({
@@ -152,6 +152,10 @@ router.get('/checkGroupMembers', (req,res) => {
 				var object = {
 				"code":200,
 				"success":"Found group members",
+				"startAddress":results[0].startAddress,
+				"endAddress":results[0].endAddress,
+				"time":results[0].time,
+				"date":results[0].date
 				}
 				for(var i in results) {
 					object[i] = results[i].userId
