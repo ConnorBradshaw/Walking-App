@@ -107,7 +107,7 @@ router.get('/checkForRequest', (req,res) => {
 });
 router.get('/checkSentRequest', (req,res) => {
 	userId = req.session.user.userId;
-	CHECK_REQUEST = `SELECT status, reqId from request WHERE requesterId = ${userId}`;
+	CHECK_REQUEST = `SELECT status, requesteeId from request WHERE requesterId = ${userId}`;
 	db.query(CHECK_REQUEST, (error, results, fields) => {
 		if(error) {
 				res.send({
@@ -120,9 +120,10 @@ router.get('/checkSentRequest', (req,res) => {
 					var object = {
 						"code":200,
 						"success":"Status of requests",
+						"numOfRequest":results.length
 					}
 					for(var i in results) {
-						object["[" + i + "] Request Num"] = results[i].reqId,
+						object["[" + i + "] User ID"] = results[i].requesterId,
 						object["[" + i + "] Status"] = results[i].status
 					}
 					res.send(object);
