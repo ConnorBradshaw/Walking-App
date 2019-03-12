@@ -6,14 +6,16 @@ const router = express.Router();
 router.post('/request', (req,res) => {
 	var group = null;
     request = {
+    	startAddress: req.body.startAddress,
         startLocationLat: req.body.startLocationLat,
         startLocationLong: req.body.startLocationLong,
+        endAddress: req.body.endAddress,
         endLocationLat: req.body.endLocationLat,
         endLocationLong: req.body.endLocationLong,
         timeLeaving: req.body.timeLeaving,
         dateOfRequest: req.body.dateOfRequest,
     }
-    POST_LOCATION = `INSERT into location (userId, startLocationLat, startLocationLong, endLocationLat, endLocationLong, timeLeaving, dateOfRequest) VALUES ('${req.session.user.userId}', '${request.startLocationLat}', '${request.startLocationLong}', '${request.endLocationLat}', '${request.endLocationLong}', '${request.timeLeaving}', '${request.dateOfRequest}')`;
+    POST_LOCATION = `INSERT into location (userId, startAddress, startLocationLat, startLocationLong, endAddress, endLocationLat, endLocationLong, timeLeaving, dateOfRequest) VALUES ('${req.session.user.userId}', '${request.startLocationLat}', '${request.startLocationLong}', '${request.endLocationLat}', '${request.endLocationLong}', '${request.timeLeaving}', '${request.dateOfRequest}')`;
     GET_GROUP_NUM = `SELECT groupNum from groups where userId = ${req.session.user.userId} && type = 'Owner`;
     GET_MATCH = `SELECT userId from location WHERE (startLocationLong  >= ${request.startLocationLong - .004} && startLocationLong <= ${request.startLocationLong + .004}) &&  (startLocationLat  >= ${request.startLocationLat - .004} && startLocationLat <= ${request.startLocationLat + .004}) && (endLocationLong  >= ${request.endLocationLong - .004} && endLocationLong <= ${request.endLocationLong + .004}) && (endLocationLat  >= ${request.endLocationLat - .004} && endLocationLat <= ${request.endLocationLat + .004})`;
     db.query(GET_MATCH, (error, results, fields) => {
