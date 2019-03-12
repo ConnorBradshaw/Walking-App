@@ -155,7 +155,8 @@ router.get('/checkGroupMembers', (req,res) => {
 				"startAddress":results[0].startAddress,
 				"endAddress":results[0].endAddress,
 				"time":results[0].time,
-				"date":results[0].date
+				"date":results[0].date,
+				"numOfMembers":results.length
 				}
 				for(var i in results) {
 					object[i] = results[i].userId
