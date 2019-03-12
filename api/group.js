@@ -98,7 +98,8 @@ router.get('/checkForRequest', (req,res) => {
 				} else {
 					res.send({
 						"code":204,
-						"success":"No requests found"
+						"success":"No requests found",
+						"numOfRequest":results.length
 					});
 				}
 			}
@@ -130,7 +131,8 @@ router.get('/checkSentRequest', (req,res) => {
 				} else {
 					res.send({
 						"code":204,
-						"success":"No requests found"
+						"success":"No requests found",
+						"numOfRequest":results.length
 					});
 				}
 			}
