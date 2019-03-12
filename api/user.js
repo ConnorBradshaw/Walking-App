@@ -28,7 +28,7 @@ router.post('/login', (req, res) => {
                 if(bcrypt.compareSync(user.password, results[0].password)){
                 	user.userId = results[0].userId;
                     req.session.user = user;
-                    GET_GROUP_NUM = `SELECT groupNum from groups where userId = ${req.session.user.userId} && type = 'Owner'`;
+                    GET_GROUP_NUM = `SELECT groupNum from groups where userId = ${req.session.user.userId}`;
 					db.query(GET_GROUP_NUM, (error, results, fields) => {
 						if(error) {
 							res.send({
